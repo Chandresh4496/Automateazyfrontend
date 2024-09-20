@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { CustomStorageService } from 'src/app/service/custom-storage.service';
 import { HttpTransferService } from 'src/app/service/http-transfer.service';
 
 @Component({
@@ -112,9 +114,10 @@ export class TableComponent {
 @Output() setItemCount:EventEmitter<number> = new EventEmitter();
 itemDataList:any=[]
 isLoading:boolean=true
+isRedirectToLogin:boolean=false
 paggingInfo:any={pageNo:1,limit:10,totalPageCount:0,pageLimitIndex:1}
 
-  constructor(private httpService:HttpTransferService){
+  constructor(private httpService:HttpTransferService,private customStorage:CustomStorageService,private router: Router){
     
   }
   ngOnInit(){
@@ -137,6 +140,17 @@ paggingInfo:any={pageNo:1,limit:10,totalPageCount:0,pageLimitIndex:1}
 
       }
       setTimeout(()=>{this.isLoading=false},80);
-    },err=>{setTimeout(()=>{this.isLoading=false},80);})
+    },err=>{
+      this.isLoading=false
+      if(err.status==401){
+        this.customStorage.clearAllData()
+        this.isRedirectToLogin=true
+        setTimeout(()=>{
+          this.router.navigate(['/login']); //redirect to the login page
+        },140)
+      }
+    })
   }
+
+  //
 }

@@ -7,10 +7,9 @@ body{
 }
 :root {
     --font-color:#495051;
-    --font-theme-color:#836ad1;
-    --color-teme: #0f0;
-    --bg-theme:#d8c5ff;
-    --bg-child-theme-color:#5e3ec5;
+    --font-theme-color :#0ed3c4/*:#836ad1*/;
+    --bg-theme:#0ed3c4;
+    --bg-child-theme-color:#55a7a0 /*#5e3ec5*/;
 
   }
   .font-12{

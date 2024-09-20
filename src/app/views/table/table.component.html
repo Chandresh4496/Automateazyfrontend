@@ -44,6 +44,9 @@
     <div *ngIf="isLoading"  class="tv-loader-container tv-content-center">
         <ng-container *ngTemplateOutlet="tvLoader;"></ng-container>
     </div>
+    <div *ngIf="isRedirectToLogin" class="tv-loader-container tv-content-center tv-theme-color tv-redirect-pannel">
+        <b>Redirecting to Login...</b>
+    </div>
     <!-- pagging start   -->
     <div class="tv-pagging-container">
         <div class="tv-left-container">

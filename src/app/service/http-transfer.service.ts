@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, retry, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { CustomStorageService } from './custom-storage.service';
@@ -109,18 +109,30 @@ export class HttpTransferService {
       map((response: any) => {
         return response;
       }),catchError((err : any) => {
-        let errorMessage = 'Server Error';
-        if(err.status==401){
-          return this.handle401Error('POST',url, json,toast);
+        if(err?.status==401){
+          // return this.handle401Error('POST',url,json,toast)
+          return this.handleError(err,false)
         }
-        if(toast)this.toastr.error(errorMessage, 'Error')
-        return throwError(() => new Error(errorMessage));
+        return this.handleError(err,true)
         
       })
      )
   }
   // end post method here
 
-  
+  // erroe handle
+  private handleError(error: HttpErrorResponse,toast=true): any {
+    let errorResponse = {status: error.status,message:error.error.message};
+    if (error.error instanceof ErrorEvent) {
+      errorResponse.message = `${error.error.message}`;
+    }else if(error?.error?.message){
+      errorResponse.message=error?.error?.message
+    }else {
+      errorResponse.message = `Internal Server Error`;
+    }
+    if(toast)this.toastr.error(errorResponse.message,'Error')
+    return throwError(() => errorResponse); 
+  }
+
   
 }
