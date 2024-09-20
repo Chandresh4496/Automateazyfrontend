@@ -93,9 +93,9 @@
   flex: 1;
   width: 100%;
 }
-
+.ln-container .ln-inner-box .ln-content .ln-title{font-size: 17px;}
 /* login loader  */
-
+ 
 .ln-container .spinner-grow{
   color: white;
   height: 10px;
@@ -130,7 +130,7 @@
 .ln-container .ln-inner-left .ln-thumnail{
   flex: 1;
   height: 0px;
-  height: 0px;
+  width: 100%;
   padding: 20px 20px 0px 0px;
 }
 

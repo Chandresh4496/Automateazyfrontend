@@ -17,7 +17,7 @@
 
   <ng-template #authTemp  let-formValidator="formValidator" let-title="title" let-submitBtnText="submitBtnText">
     <div class="ln-content w-100 h-100"> 
-      <span><b>{{title}}</b></span>
+      <span class="ln-title"><b>{{title}}</b></span>
       <div class="w-100"> 
         <form [formGroup]="formValidator"  class="ln-form font-14" (ngSubmit)="onSubmit()">
          <div *ngIf="formtype=='Signup'" class="ln-input-box"> 
