@@ -1,0 +1,16 @@
+
+<diV class="bd-container w-100 h-100">
+   <div class="bd-container-header">
+      <div class="bg-header-inner-left">
+         <div class="bd-option-btn font-15 bd-center-content" [class.bd-active-option-btn]="true">ALL</div>
+      </div>
+      <div class="bg-header-inner-right">
+         <span  class="bd-color-theme"><b>Total Leads : {{totalLeads || 0}}</b></span>
+         <div class="bd-option-btn bd-active-option-btn bd-center-content" (click)="tableView?.getLeadData()" ><i style="font-size: 12px;" class="fas fa-sync"></i></div>
+         <i class="bi bi-arrow-repeat"></i>
+      </div>
+   </div>
+   <div class="bd-container-body">
+     <view-table #tableView class="w-100 h-100" (setItemCount)="totalLeads=$event"></view-table>  
+   </div>
+</diV>

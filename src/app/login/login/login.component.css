@@ -1,0 +1,136 @@
+
+
+.ln-container .ln-inner-box .ln-content
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.ln-container .ln-inner-box .ln-content h2 
+{
+  font-size: 2em;
+  text-transform: uppercase;
+}
+.ln-container .ln-inner-box .ln-content .ln-form 
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ln-container .ln-inner-box .ln-content .ln-form .ln-input-box
+{
+  width: 100%;
+}
+
+.ln-container .ln-content .ln-form .ln-links 
+{
+  width: 100%;
+  display: flex;
+  justify-content:end;
+}
+.ln-container .ln-content .ln-form .ln-links a 
+{
+  color:var(--font-theme-color);
+  text-decoration: none;
+}
+
+.ln-container .ln-content .ln-form .ln-error-text{
+  color: red;
+  font-size: 12px;
+}
+
+
+.ln-container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color:var(--bg-theme);
+}
+.ln-container .ln-inner-box{
+  width: 60%;
+  height: 60%;
+  max-height: 100%;
+  max-width: 100%;
+  background:white;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,9);
+  overflow: auto;
+}
+
+.ln-inner-box .ln-content .ln-form .ln-input-box button{
+  padding:8px 20px;
+  background-color:var(--bg-child-theme-color);
+  cursor: pointer;
+  border:none;
+  border-radius: 50px;
+  color: white;
+}
+.ln-container .ln-inner-box .ln-content .ln-form .ln-input-field
+{
+  width: 100%;
+  padding:10px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.ln-container .ln-inner-box .ln-content .ln-form .ln-input-box input{
+  border: none;
+  outline: none;
+  flex: 1;
+  width: 100%;
+}
+
+/* login loader  */
+
+.ln-container .spinner-grow{
+  color: white;
+  height: 10px;
+  width: 10px;
+  margin: 2px;
+}
+
+@media (max-width: 758px) {
+  .ln-inner-box{
+    flex-direction: column;
+  }
+  .ln-inner-box .ln-inner-left,.ln-inner-box .ln-inner-right{
+    width: 100% !important;
+  }
+}
+
+.ln-container ::ng-deep .ln-logo img{
+  width: 200px !important;
+  height: unset !important;
+}
+.ln-container .ln-inner-left > div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 40px 40px 0px 0px;
+}
+.ln-container ::ng-deep .ln-login-thumnail img{
+  object-fit: contain;
+  width: 100% !important;
+  height: 80% !important;
+}
+.ln-container .ln-inner-left .ln-thumnail{
+  flex: 1;
+  height: 0px;
+  height: 0px;
+  padding: 20px 20px 0px 0px;
+}
+

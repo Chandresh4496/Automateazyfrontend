@@ -1,0 +1,85 @@
+ <section class="ln-container">
+   <div class="ln-inner-box"> 
+    <div class="ln-inner-left w-50 h-100">
+      <div class="h-100">
+        <img-icon type="login" class="ln-logo" name="logo" [size]="0"></img-icon>
+        <div class="ln-thumnail">
+          <img-icon type="login" class="ln-login-thumnail" name="loginThumnail" [size]="80" [sizeUnit]="'%'"></img-icon>
+        </div>
+      </div>
+    </div>
+    <div class="ln-inner-right w-50 h-100">
+      <ng-container *ngIf="formtype=='Signup'"><ng-container *ngTemplateOutlet="authTemp;context:{'formValidator':signUpForm,'title':'Signup',submitBtnText:'Signup'}"></ng-container> </ng-container>
+      <ng-container *ngIf="formtype=='Login'"><ng-container *ngTemplateOutlet="authTemp;context:{'formValidator':loginForm,'title':'Login to your account',submitBtnText:'Login'}"></ng-container> </ng-container>
+    </div>
+   </div> 
+  </section>
+
+  <ng-template #authTemp  let-formValidator="formValidator" let-title="title" let-submitBtnText="submitBtnText">
+    <div class="ln-content w-100 h-100"> 
+      <span><b>{{title}}</b></span>
+      <div class="w-100"> 
+        <form [formGroup]="formValidator"  class="ln-form font-14" (ngSubmit)="onSubmit()">
+         <div *ngIf="formtype=='Signup'" class="ln-input-box"> 
+            <label>Name</label>
+            <div class="ln-input-field">
+              <input type="text" formControlName="name"  name="name" id="name" required>
+            </div>
+            <div *ngIf="formValidator.get('name').invalid && (formValidator.get('name').dirty || formValidator.get('name').touched)" class="ln-error-text">
+              <div *ngIf="formValidator.get('name').errors?.required">
+                Name is required.
+              </div>
+              <div *ngIf="formValidator.get('name').errors?.minlength">
+                Name must be at least 3 characters long.
+              </div>
+            </div>
+           </div> 
+           <div class="ln-input-box mt-1"> 
+            <label>Email</label>
+              <div class="ln-input-field">
+                <input type="text"  formControlName="username" required [(ngModel)]="formValidator.username">
+              </div>
+             <div *ngIf="formValidator.get('username').invalid && (formValidator.get('username').dirty || formValidator.get('username').touched)" class="ln-error-text">
+               <div *ngIf="formValidator.get('username').errors?.required">
+                 Email is required.
+               </div>
+               <div *ngIf="formValidator.get('username').errors?.email">
+                Please enter valid Email 
+              </div>
+             </div>
+           </div> 
+           <div class="ln-input-box mt-1"> 
+            <label>Password</label>
+            <div class="ln-input-field">
+              <input [type]="passwordTypeAttribute"  formControlName="password" required [(ngModel)]="formValidator.password">
+              <i (click)="passwordTypeAttribute = passwordTypeAttribute === 'password' ? 'text' : 'password';" role="button" class="eyeIcon ml-1" [ngClass]="passwordTypeAttribute == 'password' ? 'far fa-eye-slash' : 'far fa-eye'"></i>
+            </div>
+           <div *ngIf="formValidator.get('password').invalid && (formValidator.get('password').dirty || formValidator.get('password').touched)" class="ln-error-text">
+             <div *ngIf="formValidator.get('password').errors?.required">
+               Password is required.
+             </div>
+             <div *ngIf="formValidator.get('password').errors?.minlength">
+               Password must be at least 6 characters long.
+             </div>
+           </div>
+           </div> 
+           <div class="ln-links font-12">
+            <a href="#">Forgot Password</a>
+           </div> 
+           <div class="ln-input-box"> 
+             <button *ngIf="!isLoading" type="submit" [disabled]="formValidator.invalid">{{submitBtnText}}</button>
+             <button *ngIf="isLoading" type="submit" [disabled]="true">
+              <ng-container *ngTemplateOutlet="loader"></ng-container>
+             </button>
+           </div> 
+
+        </form>
+      </div> 
+     </div> 
+  </ng-template>
+
+  <ng-template #loader>
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  </ng-template>

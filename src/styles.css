@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+body{
+    height: 100vh;
+    width: 100vw;
+}
+:root {
+    --font-color:#495051;
+    --font-theme-color:#836ad1;
+    --color-teme: #0f0;
+    --bg-theme:#d8c5ff;
+    --bg-child-theme-color:#5e3ec5;
+
+  }
+  .font-12{
+    font-size: 12px;
+  }
+  .font-14{
+    font-size: 14px;
+  }
+  .font-15{
+    font-size: 15px;
+  }
+  
+

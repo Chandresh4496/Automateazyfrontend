@@ -1,0 +1,76 @@
+<div class="tv-container w-100 h-100">
+    <!-- table start  -->
+     
+    <div class="tv-table-container">
+        <div *ngIf="itemDataList?.length>0" class="tv-header-wrapper">
+            <div class="tv-header-row font-15">
+                <ng-container *ngFor="let column of columnList">
+                    <div class="tv-column" >
+                        <div class="tv-content-center tv-column-inner" [style.width.px]="column.width">
+                            <input *ngIf="column.checkbox" type="checkbox"/>
+                            <b>{{column.headerName}}</b>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngIf="itemDataList?.length>0" class="tv-body-wrapper font-14">
+            <ng-container *ngFor="let item of itemDataList;let index=index">
+                <div class="tv-body-row" [class.tv-checked-row]="item.checked">
+                    <ng-container *ngFor="let column of columnList">
+                        <div class="tv-column" [ngClass]="column?.cellClass ? column?.cellClass : ''">
+                            <div class="tv-content-center tv-column-inner" [style.width.px]="column.width">
+                                <ng-container *ngIf="column.key=='seq'">
+                                    <input *ngIf="column.checkbox" [checked]="item.checked" [(ngModel)]="item.checked" type="checkbox"/>
+                                    <span>{{index+1}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="column.key!=='seq'">
+                                  <span class="tv-cell-text">{{item[column.key]}}  </span> 
+                                  <span *ngIf="column.key=='email'">
+                                    <img-icon type="tableView" name="gmail" [size]="20"></img-icon>
+                                  </span>
+                                </ng-container>
+                                
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+        <div *ngIf="!itemDataList?.length && !isLoading" class="tv-content-center h-100 w-100 tv-theme-color">
+            <span><b>No Data Found!</b></span>
+        </div>
+    </div>
+    <div *ngIf="isLoading"  class="tv-loader-container tv-content-center">
+        <ng-container *ngTemplateOutlet="tvLoader;"></ng-container>
+    </div>
+    <!-- pagging start   -->
+    <div class="tv-pagging-container">
+        <div class="tv-left-container">
+            <div class="tv-pagging-btn tv-theme-color font-14" (click)="paggingInfo.pageLimitIndex!=1 && paggingInfo.pageLimitIndex=paggingInfo.pageLimitIndex-10"><i class="fa fa-chevron-left"></i></div>
+            <ng-container  *ngFor="let page of [].constructor(10);let index=index">
+                <ng-container *ngIf="(index+paggingInfo.pageLimitIndex)<paggingInfo.totalPageCount">
+                    <div class="tv-pagging-btn tv-content-center font-14" [class.tv-active-page-index]="(index+paggingInfo.pageLimitIndex)==paggingInfo.pageNo" (click)="paggingInfo.pageNo=(index+paggingInfo.pageLimitIndex);getLeadData()">
+                        {{index+paggingInfo.pageLimitIndex}}
+                    </div>
+                </ng-container>
+            </ng-container>
+            <div class="tv-pagging-btn tv-theme-color font-14" (click)="paggingInfo.pageLimitIndex<=paggingInfo.totalPageCount && paggingInfo.pageLimitIndex=paggingInfo.pageLimitIndex+10"><i class="fa fa-chevron-right"></i></div>
+        </div>
+        <div class="tv-right-container d-flex font-15">
+            <b>Rows Per Page:</b> 
+            <input type="number" [(ngModel)]="paggingInfo.limit" (change)="getLeadData()" (input)="getLeadData()"/>
+        </div>
+    </div>
+</div>
+
+<ng-template #tvLoader>
+       <!-- loader start -->
+       <div class="tv-loader-container tv-content-center">
+        <div class="d-flex">
+            <span class="tv-loader m-1"></span>
+            <span class="tv-loader m-1"></span>
+            <span class="tv-loader m-1"></span>
+        </div>    
+    </div>
+</ng-template>
